@@ -26,7 +26,11 @@ fi
 echo
 
 echo "Network:"
-scutil --get LocalHostName
-echo
+
+if ping -c 1 -W 2 8.8.8.8 >/dev/null 2>&1; then
+    echo "Status: ONLINE"
+else
+    echo "Status: OFFLINE"
+fi
 
 echo "Health Check Complete"
