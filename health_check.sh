@@ -32,12 +32,25 @@ else
 fi
 echo
 
+echo "Memory:"
+
+MEMORY_FREE=$(memory_pressure -Q | awk -F': ' ' /System-wide memory free percentage/ {print $2}' | tr -d '%')
+
+echo "Free Memory: ${MEMORY_FREE}%"
+
+if [ "$MEMORY_FREE" -lt 50 ]; then
+    echo "Memory Status: WARNING"
+else
+    echo "Memory Status: OK"
+fi
+echo
+
 echo "Network:"
 
-if ping -c 1 -W 2 8.8.8.8 >/dev/null 2>&1; then
-    echo "Status: ONLINE"
+if ping -c 1 8.8.8.8 > /dev/null 2>&1; then
+    echo "Network Status: ONLINE"
 else
-    echo "Status: OFFLINE"
+    echo "Network Status: OFFLINE"
 fi
 echo
 
