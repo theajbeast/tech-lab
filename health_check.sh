@@ -2,9 +2,11 @@
 
 OVERALL_STATUS="HEALTHY"
 TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
+LOG_FILE="health_check.log"
 
 echo "=== AJ Beast System Health Check ==="
 echo "Timestamp: $TIMESTAMP"
+echo "[$TIMESTAMP] Health check started" >> "$LOG_FILE"
 echo
 
 echo "System:"
@@ -55,8 +57,10 @@ echo
 echo "Network:"
 
 if ping -c 1 8.8.8.8 > /dev/null 2>&1; then
+    NETWORK_STATUS="ONLINE"
     echo "Network Status: ONLINE"
 else
+    NETWORK_STATUS="OFFLINE"
     echo "Network Status: OFFLINE"
     OVERALL_STATUS="WARNING"
 fi
@@ -68,3 +72,6 @@ echo
 echo "=============================="
 echo "OVERALL SYSTEM STATUS: $OVERALL_STATUS"
 echo "=============================="
+
+echo "[$TIMESTAMP] Overall Status: $OVERALL_STATUS" >> "$LOG_FILE"
+echo "[$TIMESTAMP] Disk: ${DISK_USAGE}% | Memory Free: ${MEMORY_FREE}% | Load: ${LOAD_1MIN} | Network: $NETWORK_STATUS | Overall: $OVERALL_STATUS" >> "$LOG_FILE"
