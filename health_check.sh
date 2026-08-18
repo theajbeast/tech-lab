@@ -1,8 +1,10 @@
 #!/bin/bash
 
 OVERALL_STATUS="HEALTHY"
+TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
 
 echo "=== AJ Beast System Health Check ==="
+echo "Timestamp: $TIMESTAMP"
 echo
 
 echo "System:"
