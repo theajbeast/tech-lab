@@ -1,8 +1,6 @@
 #!/bin/bash
 
-while true
-do
-
+show_menu() {    
     echo "================================"
     echo "        AJ BEAST TECH LAB"
     echo "================================"
@@ -12,39 +10,52 @@ do
     echo "3. Help"
     echo "4. Exit"
     echo
+} 
 
-    read -p "Select an option: " choice
+show_help() {
+    echo
+    echo "AJ Beast Tech Lab Help"
+    echo "1. System Health Check - Checks system health."
+    echo "2. System Information - Displays system information."
+    echo "3. Help - Displays this help menu."
+    echo "4. Exit - Exits the lab."
+    echo
+}
 
-    case $choice in 
+run_tool() {
+    case $choice in
         1)
             ./health_check.sh
             ;;
-        
+
         2)
             ./system_info.sh
             ;;
 
-        3) 
-            echo
-            echo "AJ Beast Tech Lab"
-            echo "Available tools:"
-            echo "  1. System Health Check"
-            echo "  2. System Information"
-            echo "  3. Help"
-            echo "  4. Exit"
+        3)  show_help
             ;;
-    
-        4) 
-            echo "Exiting AJ Beast Tech Lab..."
+ 
+        4)  echo "Exiting AJ Beast Tech Lab..."
             exit 0
             ;;
-    
-        *)
-            echo "Invalid option. Please select 1, 2, 3 or, 4."
+
+        *)  
+            echo "Invalid option. Please select 1, 2, 3, or 4."
             ;;
      esac
+}
+     
+while true
+do
+    clear
 
-     if [ "$choice" != "4" ]; then
+    show_menu
+
+    read -p "Select an option: " choice
+
+    run_tool
+
+    if [ "$choice" != "4" ]; then
          echo
          read -p "Press Enter to return to the menu..."
      fi
