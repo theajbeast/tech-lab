@@ -14,7 +14,7 @@ show_menu() {
 
 show_help() {
     echo
-    echo "AJ Beast Tech Lab Help"
+    echo "$1"
     echo "1. System Health Check - Checks system health."
     echo "2. System Information - Displays system information."
     echo "3. Help - Displays this help menu."
@@ -32,7 +32,7 @@ run_tool() {
             ./system_info.sh
             ;;
 
-        3)  show_help
+        3)  show_help "AJ Beast Tech Lab Help"
             ;;
  
         4)  echo "Exiting AJ Beast Tech Lab..."
